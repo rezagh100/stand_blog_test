@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="heading-page header-text">
+        <section class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-content">
+                            <h4>{{ article.title }}</h4>
+                            <h6 style="font-size:18px; font-style:italic; color:#fff; margin-top:10px;
+           text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
+                                The meaning of life is not to be discovered, but to be created
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Banner Ends Here -->
+
+    <section class="blog-posts grid-system">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="all-blog-posts">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="blog-post">
+                                    <div class="blog-thumb">
+                                        <img src="{{ article.image.url }}" alt="">
+                                    </div>
+                                    <div class="down-content">
+                                        <span>{{ article.category.first.title }}</span>
+                                        <a href="post-details.html"><h4>{{ article.title }}</h4></a>
+                                        <ul class="post-info">
+                                            <li><a href="#">{{ article.author }}</a></li>
+                                            <li><a href="#">{{ article.created_at }}</a></li>
+                                            <li><a href="#">10 Comments</a></li>
+                                        </ul>
+                                        <p>{{ article.body }}</p>
+                                        <div class="post-options">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <ul class="post-tags">
+                                                        <li><i class="fa fa-tags"></i></li>
+                                                        <li><a href="#">Best Templates</a>,</li>
+                                                        <li><a href="#">TemplateMo</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-6">
+                                                    <ul class="post-share">
+                                                        <li><i class="fa fa-share-alt"></i></li>
+                                                        <li><a href="#">Facebook</a>,</li>
+                                                        <li><a href="#"> Twitter</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="sidebar-item comments">
+                                    <div class="sidebar-heading">
+                                        <h2>4 comments</h2>
+                                    </div>
+                                    <div class="content">
+                                        <ul>
+                                            {% for comments in article.comments.all %}
+                                                {% if comments.parent == None %}
+                                                    <li>
+                                                        <div class="author-thumb">
+                                                            <img src="{% static 'images/comment-author-01.jpg' %}"
+                                                                 alt="">
+                                                        </div>
+                                                        <div class="right-content">
+                                                            <h4>{{ comments.user }}<span>{{ comments.created_at }}</span>
+                                                            </h4>
+                                                            <p>{{ comments.text }}</p>
+                                                            <button onclick="set_value({{ comments.id }})"
+                                                                    class="btn btn-primary">reply
+                                                            </button>
+                                                        </div>
+                                                    </li>
+                                                    {% for reply in comments.replies.all %}
+                                                        <li class="replied">
+                                                            <div class="author-thumb">
+                                                                <img src="{% static 'images/comment-author-02.jpg' %}"
+                                                                     alt="">
+                                                            </div>
+                                                            <div class="right-content">
+                                                                <h4>{{ reply.user }}<span>{{ reply.created_at }}</span>
+                                                                </h4>
+                                                                <p>{{ reply.text }}</p>
+                                                            </div>
+                                                        </li>
+
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if user.is_authenticated %}
+
+                                <div class="col-lg-12">
+                                    <div class="sidebar-item submit-comment">
+                                        <div class="sidebar-heading">
+                                            <h2>Your comment</h2>
+                                        </div>
+                                        <div class="content">
+                                            <form id="comment" action="#" method="post">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <input type="hidden" value="" id="parent_id" name="parent_id">
+
+                                                    <div class="col-lg-12">
+
+                                                        <fieldset>
+                                                        <textarea name="text" rows="6" id="text"
+                                                                  placeholder="Type your comment"
+                                                                  required=""></textarea>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <fieldset>
+                                                            <button type="submit" id="form-submit" class="main-button">
+                                                                Submit
+                                                            </button>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <a href="{% url 'account:login' %}" class="btn btn-outline-warning">please login</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    {% include 'includes/sidebar.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        function set_value(id) {
+            document.getElementById('parent_id').value = id
+        }
+
+
+    </script>
+{% endblock %}
