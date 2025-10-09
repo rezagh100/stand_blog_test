@@ -1,6 +1,10 @@
 from django.contrib import admin
-from .models import Article, Category, Comment
+from . import models
 
-admin.site.register(Article)
+
+@admin.register(models.Article)
+class ArticleAdmin(Article, ModelAdmin):
+    list_display = ('title','body')
+
 admin.site.register(Category)
 admin.site.register(Comment)
