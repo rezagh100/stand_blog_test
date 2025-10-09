@@ -2,9 +2,19 @@ from django.contrib import admin
 from . import models
 
 
-@admin.register(models.Article)
-class ArticleAdmin(Article, ModelAdmin):
-    list_display = ('title','body')
 
-admin.site.register(Category)
-admin.site.register(Comment)
+
+@admin.register(models.Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+
+@admin.register(models.Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+
+@admin.register(models.Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('title','show_image')
+    list_filter = ('title',)
+    search_fields = ('title','body')
+
