@@ -14,7 +14,7 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(models.Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title','show_image')
+    list_display = ('title','show_image','author')
     list_filter = ('title',)
     search_fields = ('title','body')
 
