@@ -1,3 +1,4 @@
+from turtle import mode
 from django.contrib import admin
 from . import models
 
@@ -18,3 +19,4 @@ class ArticleAdmin(admin.ModelAdmin):
     list_filter = ('title',)
     search_fields = ('title','body')
 
+admin.site.register(models.Like)

@@ -1,3 +1,5 @@
+from tabnanny import verbose
+from turtle import mode
 from django.db import models
 from django.shortcuts import reverse
 from django.utils.text import slugify
@@ -24,7 +26,6 @@ class Article(models.Model):
 
     def show_image(self):
         return format_html(f'<img src="{self.image.url}" width="30px" height="30px">')
-
 
     def save(
             self,
@@ -66,3 +67,19 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text[0:30]
+
+
+class Like(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='likes')
+    article = models.ForeignKey(
+        Article, on_delete=models.CASCADE, related_name='likes')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.article.title}"
+
+    class Meta:
+        verbose_name = 'لایک'
+        verbose_name_plural = 'لایک ها'
+        ordering = ('-created_at')
