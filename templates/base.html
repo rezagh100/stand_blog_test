@@ -67,7 +67,7 @@
                             <a class="nav-link " href="about.html">ABOUT US</a>
                         </li>
                         <li class="nav-item {% if request.resolver_match.url_name == 'list' %}active {% endif %}">
-                            <a class="nav-link" href="{% url 'post:list' %}">ARTICLE LIST</a>
+                            <a class="nav-link" href="{% url 'post:list_view' %}">ARTICLE LIST</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">article Details</a>

@@ -3,90 +3,93 @@
 {% load social_share %}
 {% load filter %}
 {% block main %}
-    <!-- Page Content -->
-    <!-- Banner Starts Here -->
-    <div class="main-banner header-text">
-        <div class="container-fluid">
-            <div class="owl-banner owl-carousel">
-                {% for article in articles %}
-                    <div class="item">
-                        <img src="{{ article.image.url }}" alt="{{ article.title }}">
-                        <div class="item-content">
-                            <div class="main-content">
-                                <div class="meta-category">
-                                    <span>{{ article.category.first.title }}</span>
-                                </div>
-                                <a href="{{ article.get_absolute_url }}"><h4>{{ article.title }}</h4></a>
-                                <ul class="post-info">
-                                    <li><a href="#">{{ article.author.username }}</a></li>
-                                    <li><a href="#">{{ article.created_at }}</a></li>
-                                    <li><a href="#">12 Comments</a></li>
-                                </ul>
-                            </div>
+<!-- Page Content -->
+<!-- Banner Starts Here -->
+<div class="main-banner header-text">
+    <div class="container-fluid">
+        <div class="owl-banner owl-carousel">
+            {% for article in articles %}
+            <div class="item">
+                <img src="{{ article.image.url }}" alt="{{ article.title }}">
+                <div class="item-content">
+                    <div class="main-content">
+                        <div class="meta-category">
+                            <span>{{ article.category.first.title }}</span>
                         </div>
+                        <a href="{{ article.get_absolute_url }}">
+                            <h4>{{ article.title }}</h4>
+                        </a>
+                        <ul class="post-info">
+                            <li><a href="#">{{ article.author.username }}</a></li>
+                            <li><a href="#">{{ article.created_at }}</a></li>
+                            <li><a href="#">12 Comments</a></li>
+                        </ul>
                     </div>
-                {% endfor %}
+                </div>
             </div>
+            {% endfor %}
         </div>
     </div>
-    <!-- Banner Ends Here -->
+</div>
+<!-- Banner Ends Here -->
 
-    <section class="blog-posts">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="all-blog-posts">
-                        <div class="row">
-                            {% for article in recent_article %}
-                                <div class="col-lg-12">
-                                    <div class="blog-post">
-                                        <div class="blog-thumb">
-                                            <img src="{{ article.image.url }}" alt="">
-                                        </div>
-                                        <div class="down-content">
-                                            <span>{{ article.category.first.title }}</span>
-                                            <a href="{{ article.get_absolute_url }}"><h4>{{ article.title }}</h4></a>
-                                            <ul class="post-info">
-                                                <li><a href="#">{{ article.author }}</a></li>
-                                                <li><a href="#">{{ article.created_at }}</a></li>
-                                                <li><a href="#">48 Comments</a></li>
-                                            </ul>
-                                            <p>{{ article.body }}</p>
-                                            <div class="post-options">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <ul class="post-tags">
-                                                            <li><i class="fa fa-tags"></i></li>
-                                                            <li><a href="#">HTML CSS</a>,</li>
-                                                            <li><a href="#">Photoshop</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <ul class="post-share">
-                                                            <li><i class="fa fa-share-alt"></i></li>
-                                                            <li>{% post_to_whatsapp article.get_absolute_url 'whatsapp' %}</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+<section class="blog-posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="all-blog-posts">
+                    <div class="row">
+                        {% for article in recent_article %}
+                        <div class="col-lg-12">
+                            <div class="blog-post">
+                                <div class="blog-thumb">
+                                    <img src="{{ article.image.url }}" alt="">
+                                </div>
+                                <div class="down-content">
+                                    <span>{{ article.category.first.title }}</span>
+                                    <a href="{{ article.get_absolute_url }}">
+                                        <h4>{{ article.title }}</h4>
+                                    </a>
+                                    <ul class="post-info">
+                                        <li><a href="#">{{ article.author }}</a></li>
+                                        <li><a href="#">{{ article.created_at }}</a></li>
+                                        <li><a href="#">48 Comments</a></li>
+                                    </ul>
+                                    <p>{{ article.body }}</p>
+                                    <div class="post-options">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <ul class="post-tags">
+                                                    <li><a href=""><i style="font-size: 25px; color: red;"
+                                                                class="fa fa-heart-o">2</i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-6">
+                                                <ul class="post-share">
+                                                    <li><i class="fa fa-share-alt"></i></li>
+                                                    <li>{% post_to_whatsapp article.get_absolute_url 'whatsapp' %}</li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            {% endfor %}
-                            <div class="col-lg-12">
-                                <div class="main-button">
-                                    <a href="{% url 'post:list' %}">View All Posts</a>
-                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="col-lg-12">
+                            <div class="main-button">
+                                <a href="{% url 'post:list' %}">View All Posts</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    {% include 'includes/sidebar.html' %}
-                </div>
+            </div>
+            <div class="col-lg-4">
+                {% include 'includes/sidebar.html' %}
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 
 {% endblock %}

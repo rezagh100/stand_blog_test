@@ -70,6 +70,7 @@ class Comment(models.Model):
 
 
 class Like(models.Model):
+    # like = models.ForeignKey(User, blank=True, related_name='likes',on_delete=models.CASCADE,null = True)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='likes')
     article = models.ForeignKey(
@@ -77,9 +78,12 @@ class Like(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.article.title}"
+        return self.article.title
 
     class Meta:
         verbose_name = 'لایک'
         verbose_name_plural = 'لایک ها'
-        ordering = ('-created_at')
+        ordering = ('-created_at',)
+
+    # def total_like(self):
+    #     return self.article.like.count()
