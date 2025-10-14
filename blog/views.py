@@ -6,14 +6,6 @@ from blog.models import Article, Category, Like
 from django.contrib.auth.decorators import login_required
 
 
-# def article_list(request):
-#     articles = Article.objects.all()
-#     page_number = request.GET.get('page')
-#     paginator = Paginator(articles, 2)
-#     objects_list = paginator.get_page(page_number)
-#     return render(request, 'blog/article_list.html', {'articles': objects_list})
-
-
 class ArticleListView(ListView):
     model = Article
     template_name = 'blog/article_list.html'
@@ -23,7 +15,6 @@ class ArticleListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['articles'] = Article.objects.all()
         return context
 
 
@@ -41,21 +32,11 @@ def contactus(request):
     return render(request, 'blog/contactus.html', {'form': form})
 
 
-# def like(request, article_id):
-#     article = get_object_or_404(Article,id = article_id)
-#     if request.user in Article.likes.all():
-#         Article.likes.remove(request.user)
-
-#     else:
-#         Article.likes.add(request.user)
-
-#     return redirect('')
-
 def like(request, slug, pk):
     try:
         like = Like.objects.get(article__slug=slug, user_id=request.user.id)
         like.delete()
     except:
-        Like.objects.create(article_id = pk , user_id=request.user.id)
-        
+        Like.objects.create(article_id=pk, user_id=request.user.id)
+
     return redirect("post:list_view")
