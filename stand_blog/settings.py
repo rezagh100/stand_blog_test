@@ -33,9 +33,10 @@ INSTALLED_APPS = [
     'blog',
 
     'django_render_partial',
-    'django_social_share'
+    'django_social_share',
+    'rest_framework',
 ]
-
+#in comment hast
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -51,8 +52,7 @@ ROOT_URLCONF = 'stand_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
