@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django_social_share',
     'rest_framework',
 ]
-#in comment hast
+#in comment 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
