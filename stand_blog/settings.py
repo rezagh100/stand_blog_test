@@ -36,8 +36,6 @@ INSTALLED_APPS = [
     'django_social_share',
     'rest_framework',
 ]
-# in comment 
-# hi this is for githb a im workin
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
