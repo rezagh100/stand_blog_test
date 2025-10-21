@@ -45,7 +45,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+#sdfghj
 ROOT_URLCONF = 'stand_blog.urls'
 
 TEMPLATES = [
